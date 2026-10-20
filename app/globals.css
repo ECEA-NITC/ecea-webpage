@@ -1,26 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Cinzel&family=Hammersmith+One&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  --color-theme-background: #f6f1f1;
+  --color-theme-primary: #19a7ce;
+  --color-theme-secondary: #146c94;
+  --color-theme-black: #000000;
+  --font-title: "Times New Roman", Times, serif;
+  --font-nav: "Hammersmith One", sans-serif;
+  --font-body: "Abel", sans-serif;
+  --font-roman: "Roman SD", "Cinzel", serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 40s linear infinite;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-paper: #f8fafc;
+  --color-ink: #12121f;
+
+  --color-signal-slate: #8a98c9;
+  --color-signal-rose: #d3a3b8;
+  --color-signal-sand: #d8c49c;
+
+  --color-accent: #1f5bff;
 }
