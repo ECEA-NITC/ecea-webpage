@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Form from "next/form";
-
+import {EXPERIENCES} from "@/lib/placements"
+import Link from "next/link";
 /*
   Palette (same muted set as the hero / 404)
   paper  #F4F6FC   ink  #10163A
@@ -44,19 +45,7 @@ const TAG_STYLES: Record<string, string> = {
 };
 
 // Sample entry so the results styling is visible. Replace with real data.
-const EXPERIENCES = [
-  {
-    id: "1",
-    company: "Company name",
-    role: "Role title",
-    author: "Student name",
-    batch: "2025",
-    postedAt: "2026-09-12",
-    domain: "core",
-    summary:
-      "A short summary of the selection process: rounds, topics asked and preparation advice.",
-  },
-];
+
 
 const fieldBase =
   "w-full border border-ink/20 bg-white/80 px-4 py-3 font-body text-base text-ink " +
@@ -218,8 +207,8 @@ export default async function PlacementExperiences({
             ) : (
             <ul className="m-0 grid list-none divide-y divide-ink/10 border-y border-ink/10 p-0">
               {results.map((e) => (
+                <Link key={e.id} href={`placements/${e.id}/`}>
                 <li
-                  key={e.id}
                   className="grid gap-3 px-1 py-6 transition-colors hover:bg-white/60 sm:grid-cols-[1fr_auto] sm:gap-8 sm:px-4"
                 >
                   <div>
@@ -240,6 +229,7 @@ export default async function PlacementExperiences({
                     {DOMAINS.find((d) => d.value === e.domain)?.label}
                   </span>
                 </li>
+                </Link>
               ))}
             </ul>
             )}

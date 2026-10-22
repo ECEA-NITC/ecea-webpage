@@ -108,7 +108,7 @@ export default function Gallery() {
       >
         {/* The wrapper colour shows through the 1px gaps and becomes the hairlines.
           It is the inverse of the page background, so it works in light and dark. */}
-        <ul className="m-0 grid list-none auto-rows-[8rem] grid-cols-2 grid-flow-dense gap-px bg-black p-px dark:bg-white sm:auto-rows-[10rem] lg:auto-rows-[7rem] lg:grid-cols-12 xl:auto-rows-[8rem]">
+        <ul className="m-0 grid list-none auto-rows-32 grid-cols-2 grid-flow-dense gap-px bg-black p-px dark:bg-white sm:auto-rows-40 lg:auto-rows-28 lg:grid-cols-12 xl:auto-rows-32">
           {items.map(({ title, year, src, tone, span }, i) => (
             <li
               key={title}

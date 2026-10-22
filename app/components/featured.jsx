@@ -1,9 +1,10 @@
+import PostCard from "@/app/components/post-card"
 const seeAllHref = "/posts";
 
 const samplePosts = [
   {
     title: "Introduction to Embedded Systems Workshop",
-    date: "12 Sep 2026",
+    date: new Date(2026, 8, 12),
     excerpt:
       "A two-day hands-on session covering microcontroller basics, sensor interfacing and firmware debugging.",
     href: "/posts/embedded-systems-workshop",
@@ -11,7 +12,7 @@ const samplePosts = [
   },
   {
     title: "Talk: Careers in VLSI and Chip Design",
-    date: "28 Aug 2026",
+    date: new Date(2026, 7, 28),
     excerpt:
       "Alumni from the semiconductor industry shared how they moved from campus projects to design teams.",
     href: "/posts/vlsi-careers-talk",
@@ -19,7 +20,7 @@ const samplePosts = [
   },
   {
     title: "ECEA Hardware Hackathon 2026",
-    date: "03 Aug 2026",
+    date: new Date(2026, 7, 3),
     excerpt:
       "Twelve teams built working prototypes in 24 hours, from smart meters to low-cost radio receivers.",
     href: "/posts/hardware-hackathon",
@@ -27,7 +28,7 @@ const samplePosts = [
   },
   {
     title: "Signal Processing Reading Group",
-    date: "15 Jul 2026",
+    date: new Date(2026, 6, 15),
     excerpt:
       "Weekly sessions working through filter design and the Fourier transform with practical MATLAB examples.",
     href: "/posts/dsp-reading-group",
@@ -40,6 +41,13 @@ const linkClass =
 
 const headingClass =
   "m-0 font-roman text-4xl font-normal uppercase tracking-wider sm:text-5xl";
+
+// Renders as "12 Sep 2026" regardless of the viewer's locale.
+const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+});
 
 export default function PostList({ posts = samplePosts, href = seeAllHref }) {
   return (
@@ -58,39 +66,8 @@ export default function PostList({ posts = samplePosts, href = seeAllHref }) {
         className="m-0 mt-8 -mx-4 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:thin] sm:-mx-8 sm:gap-6 sm:px-8"
         aria-label="Latest posts"
       >
-        {posts.map(({ title, date, excerpt, href, image }) => (
-          <li
-            key={href}
-            className="w-[60vw] shrink-0 snap-start sm:w-[16rem] lg:w-[18rem]"
-          >
-            <a
-              href={href}
-              className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
-            >
-              {image ? (
-                <img
-                  src={image}
-                  alt=""
-                  className="aspect-square w-full object-cover"
-                />
-              ) : (
-                <div
-                  aria-hidden="true"
-                  className="aspect-square w-full bg-signal-slate/20"
-                />
-              )}
-
-              <div className="flex flex-1 flex-col pt-4">
-                <time className="font-body text-base text-ink/60">{date}</time>
-                <h3 className="m-0 mt-2 font-title text-2xl font-normal leading-tight group-hover:underline group-hover:underline-offset-4 sm:text-3xl">
-                  {title}
-                </h3>
-                <p className="m-0 mt-3 line-clamp-3 font-body text-base leading-[1.5] text-ink/75">
-                  {excerpt}
-                </p>
-              </div>
-            </a>
-          </li>
+        {posts.map((post) => (
+          <PostCard key={post.href} {...post} />
         ))}
       </ul>
     </section>
